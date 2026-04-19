@@ -6,11 +6,11 @@ import type { Application, Stage, Slot, StageStatus } from './types'
 
 const DB_PATH = process.env.DB_PATH || path.join(process.cwd(), 'data', 'jobboard.db')
 
-// 懒加载单例
-let _db: Database.Database | null = null
+// 使用 globalThis 保存单例，防止 Next.js 热重载时数据库连接丢失
+const globalForDb = globalThis as unknown as { __jobboard_db?: Database.Database }
 
 function getDb() {
-  if (_db) return _db
+  if (globalForDb.__jobboard_db) return globalForDb.__jobboard_db
   const dir = path.dirname(DB_PATH)
   if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true })
   const db = new Database(DB_PATH)
@@ -46,7 +46,7 @@ function getDb() {
     CREATE UNIQUE INDEX IF NOT EXISTS idx_applications_company ON applications(company);
   `)
 
-  _db = db
+  globalForDb.__jobboard_db = db
   return db
 }
 
