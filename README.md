@@ -202,15 +202,15 @@ npm run dev                        # 访问 http://localhost:3000
 **Docker**：
 
 ```bash
-docker build -t jobboard .
-docker run -p 3000:3000 -e DEEPSEEK_API_KEY=sk-xxx jobboard
+docker build -t flowboard .
+docker run -p 3000:3000 -e DEEPSEEK_API_KEY=sk-xxx flowboard
 ```
 
 | 环境变量 | 必填 | 默认值 | 说明 |
 |---|---|---|---|
 | `DEEPSEEK_API_KEY` | ✅ | — | DeepSeek API 密钥 |
 | `DEEPSEEK_MODEL` | ❌ | `deepseek-chat` | 模型名称 |
-| `DB_PATH` | ❌ | `./data/jobboard.db` | SQLite 路径 |
+| `DB_PATH` | ❌ | `./data/flowboard.db` | SQLite 路径 |
 
 ---
 
