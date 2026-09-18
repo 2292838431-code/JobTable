@@ -31,7 +31,7 @@ export default function Home() {
   }, [fetchApps])
 
   const handleDelete = async (id: string) => {
-    if (!confirm('确定删除该申请？')) return
+    if (!confirm('确定删除该流程？')) return
     await fetch(`/api/applications/${id}`, { method: 'DELETE' })
     fetchApps()
   }
@@ -55,7 +55,7 @@ export default function Home() {
       {/* 顶栏 */}
       <header className="bg-white border-b border-gray-200 px-6 py-3 flex items-center justify-between shrink-0">
         <div className="flex items-center gap-3">
-          <h1 className="text-xl font-bold text-indigo-600">📋 求职看板<span className="text-sm font-normal text-gray-400 ml-2">（西南大学 - 谷昊林 - 作品）</span></h1>
+          <h1 className="text-xl font-bold text-indigo-600">📋 流程看板<span className="text-sm font-normal text-gray-400 ml-2">（西南大学 - 谷昊林 - 作品）</span></h1>
           <button
             onClick={() => setShowAbout(true)}
             className="px-3 py-1.5 rounded-lg text-sm font-semibold bg-gradient-to-r from-amber-400 via-orange-400 to-red-400 text-white hover:from-amber-500 hover:via-orange-500 hover:to-red-500 transition-all shadow-md hover:shadow-lg animate-pulse hover:animate-none ring-2 ring-orange-300/50"

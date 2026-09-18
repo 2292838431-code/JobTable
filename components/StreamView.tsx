@@ -15,12 +15,12 @@ interface Props {
 export default function StreamView({ applications, onRefresh, onDelete, onUpdateStage, onDeleteStageCascade }: Props) {
   const [popover, setPopover] = useState<{
     stage: Stage
-    company: string
+    subject: string
     anchor: HTMLElement
   } | null>(null)
 
-  const handleStageClick = (e: React.MouseEvent, stage: Stage, company: string) => {
-    setPopover({ stage, company, anchor: e.currentTarget as HTMLElement })
+  const handleStageClick = (e: React.MouseEvent, stage: Stage, subject: string) => {
+    setPopover({ stage, subject, anchor: e.currentTarget as HTMLElement })
   }
 
   return (
@@ -32,7 +32,7 @@ export default function StreamView({ applications, onRefresh, onDelete, onUpdate
 
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
         {applications.length === 0 && (
-          <p className="text-gray-400 text-center mt-10">暂无申请，通过右侧对话或新建按钮添加</p>
+          <p className="text-gray-400 text-center mt-10">暂无流程，通过右侧对话或新建按钮添加</p>
         )}
         {applications.map((app) => {
           const stages = app.stages || []
@@ -43,7 +43,7 @@ export default function StreamView({ applications, onRefresh, onDelete, onUpdate
           return (
             <div key={app.id} className="bg-white rounded-lg border border-gray-200 p-4">
               <div className="flex items-center justify-between mb-2">
-                <h3 className="font-semibold text-base">{app.company}</h3>
+                <h3 className="font-semibold text-base">{app.subject}</h3>
                 <button
                   onClick={() => onDelete(app.id)}
                   className="text-xs text-red-400 hover:text-red-600"
@@ -70,7 +70,7 @@ export default function StreamView({ applications, onRefresh, onDelete, onUpdate
                     <div
                       key={s.id}
                       className="flex items-center gap-2 text-sm cursor-pointer hover:bg-gray-50 rounded px-1 py-0.5 -mx-1 transition"
-                      onClick={(e) => handleStageClick(e, s, app.company)}
+                      onClick={(e) => handleStageClick(e, s, app.subject)}
                     >
                       {/* 连线 */}
                       <div className="flex flex-col items-center w-4">
@@ -113,7 +113,7 @@ export default function StreamView({ applications, onRefresh, onDelete, onUpdate
       {popover && (
         <StagePopover
           stage={popover.stage}
-          company={popover.company}
+          subject={popover.subject}
           anchorEl={popover.anchor}
           onClose={() => setPopover(null)}
           onUpdate={async (id, patch) => {

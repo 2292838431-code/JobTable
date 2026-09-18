@@ -20,7 +20,7 @@ function getDb() {
   db.exec(`
     CREATE TABLE IF NOT EXISTS applications (
       id TEXT PRIMARY KEY,
-      company TEXT NOT NULL,
+      subject TEXT NOT NULL,
       note TEXT,
       created_at TEXT NOT NULL,
       updated_at TEXT NOT NULL
@@ -43,7 +43,7 @@ function getDb() {
 
     CREATE INDEX IF NOT EXISTS idx_stages_app ON stages(application_id);
     CREATE INDEX IF NOT EXISTS idx_stages_planned ON stages(planned_date);
-    CREATE UNIQUE INDEX IF NOT EXISTS idx_applications_company ON applications(company);
+    CREATE UNIQUE INDEX IF NOT EXISTS idx_applications_company ON applications(subject);
   `)
 
   globalForDb.__jobboard_db = db
@@ -54,7 +54,7 @@ const now = () => new Date().toISOString()
 
 // ── Applications ─────────────────────────────────────────────
 export function createApplication(data: {
-  company: string
+  subject: string
   note?: string | null
   stages?: Array<{
     name: string
@@ -67,10 +67,10 @@ export function createApplication(data: {
 }): Application {
   const db = getDb()
 
-  // 防重名：检查公司+岗位是否已存在
-  const existing = db.prepare(`SELECT id FROM applications WHERE company = ?`).get(data.company)
+  // 防重名：检查同名流程是否已存在
+  const existing = db.prepare(`SELECT id FROM applications WHERE subject = ?`).get(data.subject)
   if (existing) {
-    throw new Error(`已存在「${data.company}」的申请计划，不能重复创建。请换一个岗位名称或删除旧的申请后重试。`)
+    throw new Error(`已存在「${data.subject}」的流程，不能重复创建。请换一个名称或删除旧流程后重试。`)
   }
 
   const id = nanoid(10)
@@ -78,8 +78,8 @@ export function createApplication(data: {
 
   const tx = db.transaction(() => {
     db.prepare(
-      `INSERT INTO applications (id, company, note, created_at, updated_at) VALUES (?, ?, ?, ?, ?)`,
-    ).run(id, data.company, data.note ?? null, ts, ts)
+      `INSERT INTO applications (id, subject, note, created_at, updated_at) VALUES (?, ?, ?, ?, ?)`,
+    ).run(id, data.subject, data.note ?? null, ts, ts)
 
     ;(data.stages ?? []).forEach((s, i) => {
       const sid = nanoid(10)
@@ -129,13 +129,13 @@ export function deleteApplication(id: string) {
   db.prepare(`DELETE FROM applications WHERE id = ?`).run(id)
 }
 
-export function updateApplication(id: string, patch: { company?: string; note?: string | null }) {
+export function updateApplication(id: string, patch: { subject?: string; note?: string | null }) {
   const db = getDb()
   const cur = getApplication(id)
   if (!cur) return null
   db.prepare(
-    `UPDATE applications SET company = ?, note = ?, updated_at = ? WHERE id = ?`,
-  ).run(patch.company ?? cur.company, patch.note ?? cur.note, now(), id)
+    `UPDATE applications SET subject = ?, note = ?, updated_at = ? WHERE id = ?`,
+  ).run(patch.subject ?? cur.subject, patch.note ?? cur.note, now(), id)
   return getApplication(id)
 }
 
@@ -193,7 +193,7 @@ export function getStage(id: string): Stage | null {
 export function listStagesInRange(from: string, to: string): Stage[] {
   return getDb()
     .prepare(
-      `SELECT s.*, a.company FROM stages s
+      `SELECT s.*, a.subject FROM stages s
        JOIN applications a ON s.application_id = a.id
        WHERE (s.planned_date BETWEEN ? AND ?) OR (s.deadline_date BETWEEN ? AND ?)
        ORDER BY s.planned_date, s.planned_slot`,

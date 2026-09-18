@@ -6,13 +6,12 @@ export const agentTools: ChatCompletionTool[] = [
     function: {
       name: 'create_application',
       description:
-        '创建一个新的求职申请，并设置链式流程节点。必须同时提供公司名和岗位名。系统会将两者组合为"公司名_岗位名"作为唯一标识。如果该公司+岗位已存在，会返回错误。每个节点包含名称、截止日期、截止时段(AM/PM)、计划日期、计划时段。如果用户没有指定计划日期，留空由系统自动安排。',
+        '创建一个新的流程，并设置链式阶段节点。必须同时提供流程名和阶段列表。流程名将作为唯一标识。如果同名流程已存在，会返回错误。每个节点包含名称、截止日期、截止时段(AM/PM)、计划日期、计划时段。如果用户没有指定计划日期，留空由系统自动安排。',
       parameters: {
         type: 'object',
-        required: ['company', 'position', 'stages'],
+        required: ['subject', 'stages'],
         properties: {
-          company: { type: 'string', description: '公司名称，如"极光数据"' },
-          position: { type: 'string', description: '岗位名称，如"前端开发"、"后端开发"、"算法工程师"' },
+          subject: { type: 'string', description: '流程名称，如"智能仓储系统_上线"' },
           note: { type: 'string', description: '备注' },
           stages: {
             type: 'array',
@@ -20,7 +19,7 @@ export const agentTools: ChatCompletionTool[] = [
               type: 'object',
               required: ['name'],
               properties: {
-                name: { type: 'string', description: '流程节点名称，如"笔试"、"一面"、"二面"' },
+                name: { type: 'string', description: '阶段名称，如"需求评审"、"方案设计"' },
                 deadline_date: { type: 'string', description: '截止日期 YYYY-MM-DD，可为null' },
                 deadline_slot: { type: 'string', enum: ['AM', 'PM'], description: '截止时段' },
                 planned_date: { type: 'string', description: '计划完成日期 YYYY-MM-DD，可为null' },
@@ -55,11 +54,11 @@ export const agentTools: ChatCompletionTool[] = [
     function: {
       name: 'bulk_shift',
       description:
-        '批量移动事件。可以按申请ID移动整个申请的所有节点，也可以按日期移动某一天的所有节点。支持：移到指定日期、或偏移N天。如果移动后超过截止日期，仍然执行移动但在结果中标记冲突。',
+        '批量移动事件。可以按流程 ID 移动整个流程的所有节点，也可以按日期移动某一天的所有节点。支持：移到指定日期、或偏移N天。如果移动后超过截止日期，仍然执行移动但在结果中标记冲突。',
       parameters: {
         type: 'object',
         properties: {
-          application_id: { type: 'string', description: '按申请ID筛选（可选）' },
+          application_id: { type: 'string', description: '按流程 ID 筛选（可选）' },
           source_date: { type: 'string', description: '按原计划日期筛选 YYYY-MM-DD（可选）' },
           stage_id: { type: 'string', description: '只移动特定节点（可选）' },
           target_date: { type: 'string', description: '目标日期 YYYY-MM-DD（和delta_days二选一）' },
@@ -73,7 +72,7 @@ export const agentTools: ChatCompletionTool[] = [
     type: 'function',
     function: {
       name: 'list_applications',
-      description: '列出所有求职申请及其流程节点。',
+      description: '列出所有流程及其阶段节点。',
       parameters: { type: 'object', properties: {} },
     },
   },

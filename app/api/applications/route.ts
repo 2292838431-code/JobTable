@@ -16,7 +16,7 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   const body = await req.json()
-  if (!body?.company) return NextResponse.json({ error: 'company required' }, { status: 400 })
+  if (!body?.subject) return NextResponse.json({ error: 'subject required' }, { status: 400 })
   const app = createApplication(body)
   return NextResponse.json(app)
 }

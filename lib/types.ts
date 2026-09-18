@@ -14,12 +14,12 @@ export interface Stage {
   note: string | null
   created_at: string
   updated_at: string
-  company?: string              // JOIN 查询时附带
+  subject?: string              // JOIN 查询时附带
 }
 
 export interface Application {
   id: string
-  company: string
+  subject: string
   note: string | null
   created_at: string
   updated_at: string

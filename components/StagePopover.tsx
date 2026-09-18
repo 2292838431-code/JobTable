@@ -5,14 +5,14 @@ import type { Stage } from '@/lib/types'
 
 interface Props {
   stage: Stage
-  company: string
+  subject: string
   anchorEl: HTMLElement | null
   onClose: () => void
   onUpdate: (stageId: string, patch: Partial<Stage>) => Promise<void>
   onDeleteCascade: (stageId: string) => Promise<void>
 }
 
-export default function StagePopover({ stage, company, anchorEl, onClose, onUpdate, onDeleteCascade }: Props) {
+export default function StagePopover({ stage, subject, anchorEl, onClose, onUpdate, onDeleteCascade }: Props) {
   const [name, setName] = useState(stage.name)
   const [plannedDate, setPlannedDate] = useState(stage.planned_date || '')
   const [plannedSlot, setPlannedSlot] = useState(stage.planned_slot || 'AM')
@@ -72,7 +72,7 @@ export default function StagePopover({ stage, company, anchorEl, onClose, onUpda
     <div ref={popRef} style={style} className="w-[264px] bg-white rounded-xl shadow-xl border border-gray-200 p-3 space-y-3">
       {/* 标题 */}
       <div className="flex items-center justify-between">
-        <span className="text-xs text-gray-400">{company}</span>
+        <span className="text-xs text-gray-400">{subject}</span>
         <button onClick={onClose} className="text-gray-300 hover:text-gray-500 text-sm">✕</button>
       </div>
 

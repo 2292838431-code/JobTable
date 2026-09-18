@@ -16,7 +16,7 @@ interface Props {
 
 const WEEKDAYS = ['一', '二', '三', '四', '五', '六', '日']
 
-type StageWithCompany = Stage & { company: string }
+type StageWithCompany = Stage & { subject: string }
 
 export default function CalendarView({
   applications,
@@ -41,7 +41,7 @@ export default function CalendarView({
         if (!s.planned_date) continue
         const key = s.planned_date
         if (!map.has(key)) map.set(key, [])
-        map.get(key)!.push({ ...s, company: app.company })
+        map.get(key)!.push({ ...s, subject: app.subject })
       }
     }
     return map
@@ -132,7 +132,7 @@ export default function CalendarView({
                   <StagePill
                     key={s.id}
                     stage={s}
-                    company={s.company}
+                    subject={s.subject}
                     onClick={(e) => handlePillClick(e, s)}
                     onDragStart={(e) => handleDragStart(e, s.id)}
                   />
@@ -148,7 +148,7 @@ export default function CalendarView({
                   <StagePill
                     key={s.id}
                     stage={s}
-                    company={s.company}
+                    subject={s.subject}
                     onClick={(e) => handlePillClick(e, s)}
                     onDragStart={(e) => handleDragStart(e, s.id)}
                   />
@@ -163,7 +163,7 @@ export default function CalendarView({
       {popover && (
         <StagePopover
           stage={popover.stage}
-          company={popover.stage.company}
+          subject={popover.stage.subject}
           anchorEl={popover.anchor}
           onClose={() => setPopover(null)}
           onUpdate={async (id, patch) => {
@@ -182,12 +182,12 @@ export default function CalendarView({
 
 function StagePill({
   stage,
-  company,
+  subject,
   onClick,
   onDragStart,
 }: {
   stage: Stage
-  company: string
+  subject: string
   onClick: (e: React.MouseEvent) => void
   onDragStart: (e: DragEvent<HTMLDivElement>) => void
 }) {
@@ -206,9 +206,9 @@ function StagePill({
           ? 'bg-green-100 text-green-700 line-through'
           : 'bg-indigo-100 text-indigo-700 hover:bg-indigo-200'
       }`}
-      title={`${company} · ${stage.name}${stage.deadline_date ? ` (截止: ${stage.deadline_date})` : ''}\n拖拽可移动到其他日期`}
+      title={`${subject} · ${stage.name}${stage.deadline_date ? ` (截止: ${stage.deadline_date})` : ''}\n拖拽可移动到其他日期`}
     >
-      {company}·{stage.name}
+      {subject}·{stage.name}
     </div>
   )
 }

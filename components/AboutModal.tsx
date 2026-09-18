@@ -16,7 +16,7 @@ export default function AboutModal({ onClose }: Props) {
         <div className="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-t-2xl px-8 py-6">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-2xl font-bold text-white">JobBoard — AI 求职管家</h2>
+              <h2 className="text-2xl font-bold text-white">JobBoard — AI 流程管家</h2>
               <p className="text-indigo-200 text-sm mt-1">LLM-Driven Job Application Management Dashboard</p>
             </div>
             <button
@@ -34,8 +34,8 @@ export default function AboutModal({ onClose }: Props) {
           <section>
             <h3 className="text-base font-bold text-gray-900 mb-2">产品定位</h3>
             <p>
-              一款<strong>以 AI Agent 为核心交互方式</strong>的求职流程管理工具。
-              用户可以通过<strong>自然语言对话</strong>创建申请、安排面试时间、批量调整日程，
+              一款<strong>以 AI Agent 为核心交互方式</strong>的多阶段流程管理工具。
+              用户可以通过<strong>自然语言对话</strong>创建流程、安排阶段时间、批量调整日程，
               也可以在日历和事件流视图中<strong>手动拖拽、点击编辑</strong>，两种操作方式完全解耦、互不冲突。
             </p>
           </section>
@@ -97,7 +97,7 @@ export default function AboutModal({ onClose }: Props) {
             <h3 className="text-base font-bold text-gray-900 mb-2">已实现功能</h3>
             <div className="grid grid-cols-2 gap-2">
               {[
-                ['AI 对话创建申请', '自然语言 → 结构化数据'],
+                ['AI 对话创建流程', '自然语言 → 结构化数据'],
                 ['日历视图', 'AM/PM 双时段 + 超期标红'],
                 ['事件流视图', '链式节点进度可视化'],
                 ['拖拽排期', '日历上拖动节点修改时间'],
@@ -105,7 +105,7 @@ export default function AboutModal({ onClose }: Props) {
                 ['级联删除', '删除节点及后续所有节点'],
                 ['批量移动', '"把明天的事往后推一天"'],
                 ['自动排期', '空闲时段智能分配'],
-                ['防重复机制', '公司_岗位联合唯一标识'],
+                ['防重复机制', '流程名 + 唯一索引双重校验'],
                 ['确认机制', 'LLM 操作需用户确认'],
                 ['上下文管理', '10 条窗口 + 强制刷新'],
               ].map(([title, desc]) => (
@@ -166,7 +166,7 @@ export default function AboutModal({ onClose }: Props) {
                     ['创建事件', '手动填写表单', '语音创建单条', 'AI 对话一次创建整条链'],
                     ['批量移动', '逐条拖拽 ✗', '不支持 ✗', '"把明天的事往后推一天" ✓'],
                     ['自动排期', '不支持 ✗', '不支持 ✗', 'AI 均匀分布+冲突检测 ✓'],
-                    ['链式流程', '不支持', '不支持', '笔试→一面→二面→HR 链式管理'],
+                    ['链式流程', '不支持', '不支持', '从立项到交付的链式阶段管理'],
                     ['智能理解', '关键词搜索', '简单语义匹配', 'LLM 深度语义理解+推理'],
                     ['批量修改', '全选→逐项改', '不支持 ✗', '一句话批量修改日期/状态'],
                     ['操作确认', '无（直接执行）', '无', '两阶段确认，防误操作'],
@@ -199,14 +199,14 @@ export default function AboutModal({ onClose }: Props) {
                 <span className="text-lg shrink-0">📧</span>
                 <div>
                   <p className="font-semibold text-gray-900 text-xs">邮件转发智能解析</p>
-                  <p className="text-gray-500 text-xs">用户收到面试邮件后，直接转发给 AI 助手，自动提取公司名、岗位、时间等关键信息，一键生成完整的事件安排，无需手动输入。</p>
+                  <p className="text-gray-500 text-xs">收到一封包含多个时间节点的通知邮件后，直接转发给 AI 助手，自动提取关键信息并一键生成完整的事件安排，无需手动输入。</p>
                 </div>
               </div>
               <div className="flex gap-3 items-start bg-purple-50 rounded-lg p-3">
                 <span className="text-lg shrink-0">🔗</span>
                 <div>
                   <p className="font-semibold text-gray-900 text-xs">接入钉钉 / 飞书等企业应用</p>
-                  <p className="text-gray-500 text-xs">一键导入钉钉日历、飞书日程等第三方事件流，打通企业协作生态，统一管理求职与工作事务。</p>
+                  <p className="text-gray-500 text-xs">一键导入钉钉日历、飞书日程等第三方事件流，打通企业协作生态，统一管理各类事务。</p>
                 </div>
               </div>
               <div className="flex gap-3 items-start bg-purple-50 rounded-lg p-3">
@@ -222,7 +222,7 @@ export default function AboutModal({ onClose }: Props) {
                   <p className="font-semibold text-gray-900 text-xs">多 Agent 框架 + 长期记忆</p>
                   <p className="text-gray-500 text-xs">
                     设计多 Agent 协作架构：调度 Agent 负责安排、评审 Agent 评估合理性、记忆 Agent 构建用户画像。
-                    系统可学习用户习惯（如"上午效率更高"），自动将重要面试安排在用户最佳状态的时间段，实现真正的个性化智能调度。
+                    系统可学习用户习惯（如"上午效率更高"），自动将关键阶段安排在用户最佳状态的时间段，实现真正的个性化智能调度。
                   </p>
                 </div>
               </div>

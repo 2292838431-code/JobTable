@@ -131,7 +131,7 @@ export default function Chat({ onDataChange }: Props) {
       {/* 标题 */}
       <div className="px-4 py-3 border-b border-gray-200">
         <h2 className="text-lg font-semibold">� AI 助手</h2>
-        <p className="text-xs text-gray-400">告诉我你要参加哪家公司的面试，我来帮你安排</p>
+        <p className="text-xs text-gray-400">告诉我你要管理什么流程，我来帮你安排</p>
       </div>
 
       {/* 使用引导按钮 */}
@@ -157,10 +157,10 @@ export default function Chat({ onDataChange }: Props) {
             <div className="flex gap-2">
               <span className="bg-amber-400 text-white w-5 h-5 rounded-full flex items-center justify-center shrink-0 text-xs font-bold">1</span>
               <div>
-                <p className="font-semibold text-gray-900">对话创建申请</p>
+                <p className="font-semibold text-gray-900">对话创建流程</p>
                 <p className="text-gray-500">在下方输入框输入：</p>
                 <p className="bg-white rounded px-2 py-1 mt-1 text-indigo-600 font-mono border border-gray-100">
-                  我要参加星海科技的前端开发岗，有笔试、一面、二面、HR面，笔试截止4月25号
+                  帮我建一个产品上线流程：需求评审、方案设计、开发联调、测试回归、正式发布
                 </p>
                 <p className="text-gray-400 mt-1">AI 会列出执行计划 → 点击<span className="text-green-600 font-bold"> 确认执行 </span>按钮</p>
               </div>
@@ -184,10 +184,10 @@ export default function Chat({ onDataChange }: Props) {
                 <p className="font-semibold text-gray-900">AI 智能调度</p>
                 <p className="text-gray-500">继续输入对话试试这些：</p>
                 <div className="bg-white rounded px-2 py-1 mt-1 border border-gray-100 space-y-0.5 font-mono text-indigo-600">
-                  <p>帮我把星海科技的面试往后推两天</p>
-                  <p>帮我自动安排星海科技的面试时间</p>
-                  <p>把笔试标记为已完成</p>
-                  <p>我现在有哪些申请？</p>
+                  <p>帮我把智能仓储系统的开发联调往后推两天</p>
+                  <p>帮我自动安排剩下几个阶段的时间</p>
+                  <p>把需求评审标记为已完成</p>
+                  <p>我现在有哪些流程？</p>
                 </div>
               </div>
             </div>
@@ -205,7 +205,7 @@ export default function Chat({ onDataChange }: Props) {
           <div className="text-center text-gray-300 mt-10 space-y-2">
             <p className="text-2xl">💬</p>
             <p className="text-sm">试试说：</p>
-            <p className="text-xs italic">&quot;我要参加星海科技的前端岗，有笔试、一面、二面、HR面&quot;</p>
+            <p className="text-xs italic">&quot;帮我建一个产品上线流程，含需求评审到正式发布&quot;</p>
             <p className="text-xs italic">&quot;帮我把云图科技的一面移到下周三下午&quot;</p>
             <p className="text-xs italic">&quot;把明天的所有事往后推一天&quot;</p>
           </div>
