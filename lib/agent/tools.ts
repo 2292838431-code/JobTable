@@ -11,7 +11,7 @@ export const agentTools: ChatCompletionTool[] = [
         type: 'object',
         required: ['company', 'position', 'stages'],
         properties: {
-          company: { type: 'string', description: '公司名称，如"字节跳动"' },
+          company: { type: 'string', description: '公司名称，如"极光数据"' },
           position: { type: 'string', description: '岗位名称，如"前端开发"、"后端开发"、"算法工程师"' },
           note: { type: 'string', description: '备注' },
           stages: {

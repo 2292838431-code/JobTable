@@ -16,9 +16,9 @@ export function seedIfEmpty() {
     return r
   }
 
-  // 1. 美团_前端开发 — 有完整的时间安排，部分已完成
+  // 1. 星海科技_前端开发 — 有完整的时间安排，部分已完成
   createApplication({
-    company: '美团_前端开发',
+    company: '星海科技_前端开发',
     note: '秋招提前批',
     stages: [
       { name: '笔试', planned_date: fmt(addDays(today, -2)), planned_slot: 'AM', deadline_date: fmt(addDays(today, -1)), deadline_slot: 'PM' },
@@ -28,9 +28,9 @@ export function seedIfEmpty() {
     ],
   })
 
-  // 2. 腾讯_后端开发 — 有时间安排
+  // 2. 云图科技_后端开发 — 有时间安排
   createApplication({
-    company: '腾讯_后端开发',
+    company: '云图科技_后端开发',
     note: '校招正式批',
     stages: [
       { name: '笔试', planned_date: fmt(addDays(today, 0)), planned_slot: 'AM', deadline_date: fmt(addDays(today, 2)), deadline_slot: 'PM' },
@@ -41,9 +41,9 @@ export function seedIfEmpty() {
     ],
   })
 
-  // 3. 阿里巴巴_算法工程师 — 部分未安排时间（可演示 auto_schedule）
+  // 3. 未来网络_算法工程师 — 部分未安排时间（可演示 auto_schedule）
   createApplication({
-    company: '阿里巴巴_算法工程师',
+    company: '未来网络_算法工程师',
     note: '实习转正',
     stages: [
       { name: '笔试', planned_date: fmt(addDays(today, 2)), planned_slot: 'PM', deadline_date: fmt(addDays(today, 3)), deadline_slot: 'PM' },
@@ -53,10 +53,10 @@ export function seedIfEmpty() {
     ],
   })
 
-  // 把美团笔试标记为 done（演示已完成状态）
-  const meituan = listApplications().find((a) => a.company === '美团_前端开发')
-  if (meituan?.stages?.[0]) {
-    updateStage(meituan.stages[0].id, { status: 'done' })
+  // 把星海科技笔试标记为 done（演示已完成状态）
+  const sampleTech = listApplications().find((a) => a.company === '星海科技_前端开发')
+  if (sampleTech?.stages?.[0]) {
+    updateStage(sampleTech.stages[0].id, { status: 'done' })
   }
 
   console.log('[seed] 已预埋 3 条演示数据')

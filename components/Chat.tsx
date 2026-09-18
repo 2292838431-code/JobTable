@@ -160,7 +160,7 @@ export default function Chat({ onDataChange }: Props) {
                 <p className="font-semibold text-gray-900">对话创建申请</p>
                 <p className="text-gray-500">在下方输入框输入：</p>
                 <p className="bg-white rounded px-2 py-1 mt-1 text-indigo-600 font-mono border border-gray-100">
-                  我要参加美团的前端开发岗，有笔试、一面、二面、HR面，笔试截止4月25号
+                  我要参加星海科技的前端开发岗，有笔试、一面、二面、HR面，笔试截止4月25号
                 </p>
                 <p className="text-gray-400 mt-1">AI 会列出执行计划 → 点击<span className="text-green-600 font-bold"> 确认执行 </span>按钮</p>
               </div>
@@ -184,8 +184,8 @@ export default function Chat({ onDataChange }: Props) {
                 <p className="font-semibold text-gray-900">AI 智能调度</p>
                 <p className="text-gray-500">继续输入对话试试这些：</p>
                 <div className="bg-white rounded px-2 py-1 mt-1 border border-gray-100 space-y-0.5 font-mono text-indigo-600">
-                  <p>帮我把美团的面试往后推两天</p>
-                  <p>帮我自动安排美团的面试时间</p>
+                  <p>帮我把星海科技的面试往后推两天</p>
+                  <p>帮我自动安排星海科技的面试时间</p>
                   <p>把笔试标记为已完成</p>
                   <p>我现在有哪些申请？</p>
                 </div>
@@ -205,8 +205,8 @@ export default function Chat({ onDataChange }: Props) {
           <div className="text-center text-gray-300 mt-10 space-y-2">
             <p className="text-2xl">💬</p>
             <p className="text-sm">试试说：</p>
-            <p className="text-xs italic">&quot;我要参加美团的前端岗，有笔试、一面、二面、HR面&quot;</p>
-            <p className="text-xs italic">&quot;帮我把腾讯的一面移到下周三下午&quot;</p>
+            <p className="text-xs italic">&quot;我要参加星海科技的前端岗，有笔试、一面、二面、HR面&quot;</p>
+            <p className="text-xs italic">&quot;帮我把云图科技的一面移到下周三下午&quot;</p>
             <p className="text-xs italic">&quot;把明天的所有事往后推一天&quot;</p>
           </div>
         )}
