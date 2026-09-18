@@ -4,13 +4,13 @@ import path from 'path'
 import fs from 'fs'
 import type { Application, Stage, Slot, StageStatus } from './types'
 
-const DB_PATH = process.env.DB_PATH || path.join(process.cwd(), 'data', 'jobboard.db')
+const DB_PATH = process.env.DB_PATH || path.join(process.cwd(), 'data', 'flowboard.db')
 
 // 使用 globalThis 保存单例，防止 Next.js 热重载时数据库连接丢失
-const globalForDb = globalThis as unknown as { __jobboard_db?: Database.Database }
+const globalForDb = globalThis as unknown as { __flowboard_db?: Database.Database }
 
 function getDb() {
-  if (globalForDb.__jobboard_db) return globalForDb.__jobboard_db
+  if (globalForDb.__flowboard_db) return globalForDb.__flowboard_db
   const dir = path.dirname(DB_PATH)
   if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true })
   const db = new Database(DB_PATH)
@@ -46,7 +46,7 @@ function getDb() {
     CREATE UNIQUE INDEX IF NOT EXISTS idx_applications_company ON applications(subject);
   `)
 
-  globalForDb.__jobboard_db = db
+  globalForDb.__flowboard_db = db
   return db
 }
 
